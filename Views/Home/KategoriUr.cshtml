@@ -1,0 +1,29 @@
+﻿@model IEnumerable<WebApplication6.Urunler>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+Ürün Adı        </th>
+        <th>
+Fiyat        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+      
+        <td>
+            @Html.DisplayFor(modelItem => item.UrunAdi)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Fiyat)
+        </td>
+        
+    </tr>
+}
+
+</table>

@@ -1,0 +1,75 @@
+
+.f-category {
+  border: solid 0px #ddd;
+  margin-top: 0px;
+  border-left: 0;
+  padding: 0px;
+  text-align: center;
+  overflow: hidden;
+  display: block; }
+  .f-category a {
+    display: block; }
+  .f-category img {
+    display: block;
+    height: 75px;
+    margin: 0;
+    -webkit-transform: scale(1);
+       -moz-transform: scale(1);
+         -o-transform: scale(1);
+            transform: scale(1);
+    -webkit-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s;
+       -moz-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s;
+         -o-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0s; }
+  .f-category:hover img {
+    -webkit-transform: scale(1) translateY(-3px);
+       -moz-transform: scale(1) translateY(-3px);
+         -o-transform: scale(1) translateY(-3px);
+            transform: scale(1) translateY(-3px);
+    opacity: .9; }
+  .f-category:hover h6 {
+    -webkit-transform: scale(1.1) translateY(2px);
+       -moz-transform: scale(1.1) translateY(2px);
+         -o-transform: scale(1.1) translateY(2px);
+            transform: scale(1.1) translateY(2px); }
+  .f-category h6 {
+    color: #333;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    margin: 10px 0;
+    padding-bottom: 0;
+    -webkit-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0.1s;
+       -moz-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0.1s;
+         -o-transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0.1s;
+            transition: all 0.25s cubic-bezier(0.4, 0, 1, 1) 0.1s; }
+    .f-category h6 .count {
+      color: #9a9a9a;
+      font-size: 12px; }
+.content-box {
+    
+    border-radius: 3px;
+    display: block;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 0px 0px rgba(180, 180, 180, 0.5);
+    overflow: hidden;
+    margin-bottom: 0px;
+}
+
+    .content-box.no-bg {
+        box-shadow: none;
+        background: none;
+        border-radius: 0;
+    }
+
+.content-box-map {
+    margin: 30px 0;
+}
+
+@media (max-width: 767px) {
+    .content-box-map {
+        margin: 0 0 30px;
+    }
+}

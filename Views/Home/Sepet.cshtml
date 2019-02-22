@@ -1,0 +1,703 @@
+﻿@using WebApplication6
+@model IEnumerable<WebApplication6.Urunler>
+
+
+@{
+    ViewBag.Title = "Sepet";
+}
+
+
+
+@section css{
+
+
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    <link href="~/Content/assets/list.css" rel="stylesheet" />
+
+    <link href="~/Content/assets/js/smart_cart.min.css?n=1" rel="stylesheet" />
+    <style>
+        .open {
+            display: none;
+            color: #fff;
+            padding: 15px;
+            background-color: #000;
+            cursor: pointer;
+        }
+
+
+
+
+        ol, ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+            blockquote:before,
+            blockquote:after,
+            q:before,
+            q:after {
+                content: '';
+                content: none
+            }
+
+        .list-group::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #f14141;
+            background: #f14141;
+        }
+
+        .list-group::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            background-color: #F5F5F5;
+        }
+
+        .list-group {
+            height: 350px;
+            width: 312.75px;
+            background: #F5F5F5;
+            overflow: hidden;
+        }
+
+            .list-group:hover {
+                overflow-y: scroll;
+            }
+
+            .list-group::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+                background: rgb(0,0,0);
+                border: 4px solid transparent;
+                background-clip: content-box;
+            }
+
+        .ttp {
+            font-size: 1.5em;
+        }
+    </style>
+
+}
+
+@section boddy{
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid">
+
+
+        <div class="">
+
+
+
+            <div class=" ">
+
+
+                <div class="col-md-3 col-xs-auto">
+                    <div id="smartcart" class=" sc-cart sc-theme-default">
+
+                        <div class="panel-heading">
+                            Sipariş Listesi
+                        </div>
+
+
+                        <div class="list-group scrollbar">
+
+                        </div>
+                        <div class="panel-footer sc-toolbar">
+                            <div class="sc-cart-summary">
+                                <div class="sc-cart-summary-subtotal">
+
+                                    <div class="form-group ">
+                                        <span class="ttp">
+                                            Toplam: <span class="sc-cart-subtotal">0</span>
+                                        </span>
+
+
+                                        <div class="radio">
+                                            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  <img width="20" height="20" src="~/Content/img/if_07.Wallet_290143.png" />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;  <input type="radio" checked="checked" value="success" name="toasts">Nakit&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                                            <img width="20" height="20" src="~/Content/img/if_08.Credit-Card_290142.png" /> &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                                            <input type="radio" value="info" name="toasts">Kart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary" type="button">Kaydet</button>
+                                                <button class="btn btn-success" type="button">Öde</button>
+                                                <button class="btn btn-warning" type="button">İkram</button>
+                                                <button class="btn btn-danger sc-cart-clear" type="button">Temizle</button>
+                                                <button class="btn btn-block" onclick="gonder" type="button">yaz</button>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+                <div class="col-md-9">
+                    <div class="open">Kategoriler</div>
+                    <div class="w3-container">
+                        <div class="w3-bar w3-green">
+
+                            @foreach (Kategoriler ktg in ViewBag.Kategoriler)
+                            {
+                                <button class="w3-bar-item w3-button tablink" onclick="openCity(event, @ktg.KategoriID )">@ktg.KategoriAdi</button>
+                            }
+
+                        </div>
+
+                        @foreach (Kategoriler ktg in ViewBag.Kategoriler as List<Kategoriler>)
+                        {
+
+
+                            <div id=@ktg.KategoriID class="w3-container w3-border city" style="display:none">
+                                @foreach (Urunler urn in (ViewBag.Urunler as List<Urunler>).Where(x => x.KategoriID == ktg.KategoriID))
+                                {
+
+                                    <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category my-cart-btn urn" style="height: 100px; width:100px; align-content:center"
+                                         data-id="@urn.UrunID" data-name="@urn.UrunAdi" data-price="@urn.Fiyat" data-quantity="1">
+                                        <img style="height:75px" src="~/Content/icon.png" alt="img">
+                                        @urn.UrunAdi
+
+
+                                    </div>
+
+
+
+
+
+                                }
+                            </div>
+                        }
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+}
+
+@section scripts
+{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function gonder() {
+
+
+        }
+        function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+        function sil(id) {
+            var gid = id.substring(1, );
+            $("#x" + gid).remove();
+            $(document).ready(function () {
+
+
+                var sum = 0;
+                $(".sc-cart-item-amount").each(function () {
+
+                    sum += parseFloat($(this).text());
+                });
+                $(".sc-cart-subtotal").text(sum);
+
+
+            })
+        }
+        function topla(id) {
+
+            var gid = id.substring(1, );
+            var x, y, z, fid, lid;
+            lid = "l" + gid;
+            fid = "f" + gid;
+
+            x = parseFloat($("#" + lid).val()).toFixed(2);
+            y = parseFloat($("#" + fid).text()).toFixed(2);
+
+
+            z = x * y;
+
+            $('#t' + gid).text(z);
+
+            $(document).ready(function () {
+
+
+                var sum = 0;
+                $(".sc-cart-item-amount").each(function () {
+
+                    sum += parseFloat($(this).text());
+                });
+                $(".sc-cart-subtotal").text(sum);
+
+
+            })
+
+
+
+        };
+
+
+        $(document).ready(function () {
+            $(".sc-cart-clear").click(function () {
+                $(".list-group").empty();
+                $(".sc-cart-subtotal").text(0);
+            })
+        })
+
+
+
+        $(document).ready(function () {
+
+            $(".urn").click(function () {
+
+
+
+
+                var id = $(this).attr("data-id");
+                var name = $(this).attr("data-name");
+                var fiyat = $(this).attr("data-price");
+                var adet = 1;
+
+                if ($("#l" + id).length > 0) {
+                    var adt = parseInt($("#l" + id).val());
+                    $("#l" + id).val(adt + 1).change();
+
+                }
+
+                else {
+
+                    $(document).ready(function () {//form tamamen yüklendikten sonra
+
+
+                        var sum = 0;
+                        $(".sc-cart-item-amount").each(function () {//fiyatları bul
+
+                            sum += parseFloat($(this).text());//topla
+                        });
+                        $(".sc-cart-subtotal").text(sum);// yazdır
+
+                    })
+                    $("div.list-group").append(
+
+                        ' <div class="sc-cart-item list-group-item" id=x' + id + '  data-uname=' + name + ' data-ufiyat=' + fiyat + ' data-adet=' + adet + '>                         <button type="button" id=s' + id + ' onclick="sil(this.id)" class="sc-cart-remove">×</button>                        <h4 class="list-group-item-heading">' + name + '</h4>                         <div class="sc-cart-item-summary">                         <span id=f' + id + '  class="sc-cart-item-price">' + parseFloat(fiyat).toFixed(2) + '</span>                          <input type="number" id=l' + id + '  min="1" max="1000" class="sc-cart-item-qty" value=1  onchange="topla(this.id)" onclick="topla(this.id)"  ></input>                             =                             <span class="sc-cart-item-amount" id=t' + id + '>' + parseFloat(adet) * parseFloat(fiyat) + '</span>                             </div>                         </div>'
+
+
+                    );
+
+
+
+                }
+            });
+        });
+
+
+
+    </script>
+}@using WebApplication6
+@model IEnumerable<WebApplication6.Urunler>
+
+
+@{
+    ViewBag.Title = "Sepet";
+}
+
+
+
+@section css{
+
+
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/w3.css" rel="stylesheet" />
+    <link href="~/Content/assets/list.css" rel="stylesheet" />
+
+    <link href="~/Content/assets/js/smart_cart.min.css?n=1" rel="stylesheet" />
+    <style>
+        .open {
+            display: none;
+            color: #fff;
+            padding: 15px;
+            background-color: #000;
+            cursor: pointer;
+        }
+
+
+
+
+        ol, ul {
+            list-style: none
+        }
+
+        blockquote,
+        q {
+            quotes: none
+        }
+
+            blockquote:before,
+            blockquote:after,
+            q:before,
+            q:after {
+                content: '';
+                content: none
+            }
+
+        .list-group::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+            background-color: #f14141;
+            background: #f14141;
+        }
+
+        .list-group::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+            background-color: #F5F5F5;
+        }
+
+        .list-group {
+            height: 350px;
+            width: 312.75px;
+            background: #F5F5F5;
+            overflow: hidden;
+        }
+
+            .list-group:hover {
+                overflow-y: scroll;
+            }
+
+            .list-group::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+                background: rgb(0,0,0);
+                border: 4px solid transparent;
+                background-clip: content-box;
+            }
+
+        .ttp {
+            font-size: 1.5em;
+        }
+    </style>
+
+}
+
+@section boddy{
+    <br />
+    <br />
+    <br />
+    <div class="container-fluid">
+
+
+        <div class="">
+
+
+
+            <div class=" ">
+
+
+                <div class="col-md-3 col-xs-auto">
+                    <div id="smartcart" class=" sc-cart sc-theme-default">
+
+                        <div class="panel-heading">
+                            Sipariş Listesi
+                        </div>
+
+
+                        <div class="list-group scrollbar">
+
+                        </div>
+                        <div class="panel-footer sc-toolbar">
+                            <div class="sc-cart-summary">
+                                <div class="sc-cart-summary-subtotal">
+
+                                    <div class="form-group ">
+                                        <span class="ttp">
+                                            Toplam: <span class="sc-cart-subtotal">0</span>
+                                        </span>
+
+
+                                        <div class="radio">
+                                            &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  &nbsp;&nbsp;  <img width="20" height="20" src="~/Content/img/if_07.Wallet_290143.png" />
+                                            &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;  <input type="radio" checked="checked" value="success" name="toasts">Nakit&nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                                            <img width="20" height="20" src="~/Content/img/if_08.Credit-Card_290142.png" /> &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;
+                                            <input type="radio" value="info" name="toasts">Kart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                            <div class="btn-group">
+                                                <button class="btn btn-primary" type="button">Kaydet</button>
+                                                <button class="btn btn-success" type="button">Öde</button>
+                                                <button class="btn btn-warning" type="button">İkram</button>
+                                                <button class="btn btn-danger sc-cart-clear" type="button">Temizle</button>
+                                                <button class="btn btn-block" onclick="gonder" type="button">yaz</button>
+
+                                            </div>
+
+
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+                <div class="col-md-9">
+                    <div class="open">Kategoriler</div>
+                    <div class="w3-container">
+                        <div class="w3-bar w3-green">
+
+                            @foreach (Kategoriler ktg in ViewBag.Kategoriler)
+                            {
+                                <button class="w3-bar-item w3-button tablink" onclick="openCity(event, @ktg.KategoriID )">@ktg.KategoriAdi</button>
+                            }
+
+                        </div>
+
+                        @foreach (Kategoriler ktg in ViewBag.Kategoriler as List<Kategoriler>)
+                        {
+
+
+                            <div id=@ktg.KategoriID class="w3-container w3-border city" style="display:none">
+                                @foreach (Urunler urn in (ViewBag.Urunler as List<Urunler>).Where(x => x.KategoriID == ktg.KategoriID))
+                                {
+
+                                    <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category my-cart-btn urn" style="height: 100px; width:100px; align-content:center"
+                                         data-id="@urn.UrunID" data-name="@urn.UrunAdi" data-price="@urn.Fiyat" data-quantity="1">
+                                        <img style="height:75px" src="~/Content/icon.png" alt="img">
+                                        @urn.UrunAdi
+
+
+                                    </div>
+
+
+
+
+
+                                }
+                            </div>
+                        }
+                    </div>
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+}
+
+@section scripts
+{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function gonder() {
+
+
+        }
+        function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+
+    </script>
+
+
+
+    <script type="text/javascript">
+
+        function sil(id) {
+            var gid = id.substring(1, );
+            $("#x" + gid).remove();
+            $(document).ready(function () {
+
+
+                var sum = 0;
+                $(".sc-cart-item-amount").each(function () {
+
+                    sum += parseFloat($(this).text());
+                });
+                $(".sc-cart-subtotal").text(sum);
+
+
+            })
+        }
+        function topla(id) {
+
+            var gid = id.substring(1, );
+            var x, y, z, fid, lid;
+            lid = "l" + gid;
+            fid = "f" + gid;
+
+            x = parseFloat($("#" + lid).val()).toFixed(2);
+            y = parseFloat($("#" + fid).text()).toFixed(2);
+
+
+            z = x * y;
+
+            $('#t' + gid).text(z);
+
+            $(document).ready(function () {
+
+
+                var sum = 0;
+                $(".sc-cart-item-amount").each(function () {
+
+                    sum += parseFloat($(this).text());
+                });
+                $(".sc-cart-subtotal").text(sum);
+
+
+            })
+
+
+
+        };
+
+
+        $(document).ready(function () {
+            $(".sc-cart-clear").click(function () {
+                $(".list-group").empty();
+                $(".sc-cart-subtotal").text(0);
+            })
+        })
+
+
+
+        $(document).ready(function () {
+
+            $(".urn").click(function () {
+
+
+
+
+                var id = $(this).attr("data-id");
+                var name = $(this).attr("data-name");
+                var fiyat = $(this).attr("data-price");
+                var adet = 1;
+
+                if ($("#l" + id).length > 0) {
+                    var adt = parseInt($("#l" + id).val());
+                    $("#l" + id).val(adt + 1).change();
+
+                }
+
+                else {
+
+                    $(document).ready(function () {//form tamamen yüklendikten sonra
+
+
+                        var sum = 0;
+                        $(".sc-cart-item-amount").each(function () {//fiyatları bul
+
+                            sum += parseFloat($(this).text());//topla
+                        });
+                        $(".sc-cart-subtotal").text(sum);// yazdır
+
+                    })
+                    $("div.list-group").append(
+
+                        ' <div class="sc-cart-item list-group-item" id=x' + id + '  data-uname=' + name + ' data-ufiyat=' + fiyat + ' data-adet=' + adet + '>                         <button type="button" id=s' + id + ' onclick="sil(this.id)" class="sc-cart-remove">×</button>                        <h4 class="list-group-item-heading">' + name + '</h4>                         <div class="sc-cart-item-summary">                         <span id=f' + id + '  class="sc-cart-item-price">' + parseFloat(fiyat).toFixed(2) + '</span>                          <input type="number" id=l' + id + '  min="1" max="1000" class="sc-cart-item-qty" value=1  onchange="topla(this.id)" onclick="topla(this.id)"  ></input>                             =                             <span class="sc-cart-item-amount" id=t' + id + '>' + parseFloat(adet) * parseFloat(fiyat) + '</span>                             </div>                         </div>'
+
+
+                    );
+
+
+
+                }
+            });
+        });
+
+
+
+    </script>
+}

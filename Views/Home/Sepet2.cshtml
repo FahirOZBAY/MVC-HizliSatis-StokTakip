@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "Sepet2";
+}
+@using WebApplication6
+
+@section css{
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+}
+@section boddy{
+    <br />
+    <br />
+    <br />
+    <div class="w3-container col-md-9">
+        <div class="w3-bar w3-green">
+
+            @foreach (Kategoriler ktg in ViewBag.Kategoriler)
+            {
+                <button class="w3-bar-item w3-button tablink" onclick="openCity(event, @ktg.KategoriID )">@ktg.KategoriAdi</button>
+            }
+
+        </div>
+
+
+        <!-- @foreach (Kategoriler ktg in ViewBag.Kategoriler)
+     {
+         <div id=@ktg.KategoriID class="w3-container w3-border city" style="display:none">
+
+             <h2>@ktg.KategoriAdi</h2>
+
+         </div>
+     }-->
+        @foreach (Kategoriler ktg in ViewBag.Kategoriler as List<Kategoriler>)
+        {
+
+
+            <div id=@ktg.KategoriID class="w3-container w3-border city" style="display:none">
+                @foreach (Urunler urn in (ViewBag.Urunler as List<Urunler>).Where(x => x.KategoriID == ktg.KategoriID))
+                {
+
+                    <div class="col-xl-2 col-md-3 col-sm-3 col-xs-4 f-category my-cart-btn urn" style="height: 100px; width:100px; align-content:center"
+                         data-id="@urn.UrunID" data-name="@urn.UrunAdi" data-price="@urn.Fiyat" data-quantity="1">
+                        <img style="height:75px" src="~/Content/icon.png" alt="img">
+                        @urn.UrunAdi
+
+
+                    </div>
+
+
+
+
+
+                }
+            </div>
+        }
+    </div>
+
+
+
+
+
+
+
+    <div class="w3-container">
+        <h2>W3.CSS Login Modal</h2>
+        <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-green w3-large">Login</button>
+
+        <div id="id01" class="w3-modal">
+            <div class="w3-modal-content w3-card-4 w3-animate-zoom" style="max-width:800px">
+
+                <div class="w3-center">
+                    <br>
+                    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-xlarge w3-hover-red w3-display-topright" title="Close Modal">&times;</span>
+                    <img src="img_avatar4.png" alt="Avatar" style="width:30%" class="w3-circle w3-margin-top">
+                </div>
+
+                <form class="w3-container" action="/action_page.php">
+                    <div class="w3-section">
+                        <label><b>Username</b></label>
+                        <input class="w3-input w3-border w3-margin-bottom" type="text" placeholder="Enter Username" name="usrname" required>
+                        <label><b>Password</b></label>
+                        <input class="w3-input w3-border" type="password" placeholder="Enter Password" name="psw" required>
+                        <button class="w3-button w3-block w3-green w3-section w3-padding" type="submit">Login</button>
+                        <input class="w3-check w3-margin-top" type="checkbox" checked="checked"> Remember me
+                    </div>
+                </form>
+
+                <div class="w3-container w3-border-top w3-padding-16 w3-light-grey">
+                    <button onclick="document.getElementById('id01').style.display='none'" type="button" class="w3-button w3-red">Cancel</button>
+                    <span class="w3-right w3-padding w3-hide-small">Forgot <a href="#">password?</a></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts
+{
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function openCity(evt, cityName) {
+            var i, x, tablinks;
+            x = document.getElementsByClassName("city");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablink");
+            for (i = 0; i < x.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" w3-red", "");
+            }
+            document.getElementById(cityName).style.display = "block";
+            evt.currentTarget.className += " w3-red";
+        }
+
+    </script>
+
+}
+
+

@@ -1,0 +1,13 @@
+﻿@model Homevm
+
+@{
+    ViewBag.Title = "Kategori Urun";
+}
+<ul>
+    @foreach (var item in Model.KategoriList)
+    {
+        <li><a href="@Url.Action("Index", "Home", new{id= item.KategoriID})" > <span> @item.KategoriAdi  </span></a> </li>
+    }
+</ul>
+
+

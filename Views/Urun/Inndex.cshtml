@@ -1,0 +1,55 @@
+﻿@using WebApplication6
+
+
+
+@{
+    ViewBag.Title = "Inndex";
+}
+
+<h2>Inndex</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            adı
+        </th>
+        <th>fiyat</th>
+
+    </tr>
+    @foreach (Kategoriler ktg in ViewBag.Kategoriler)
+    {
+        string ID = "Id" + (ktg.KategoriID).ToString();
+        foreach (Urunler urn in ViewBag.ID)
+        {
+            <h1>@urn.UrunAdi</h1>
+            <h1>@urn.Fiyat</h1>
+
+        }
+
+
+    }
+</table>
+
+<h2>2</h2>
+<table class="table">
+    <tr>
+        <th>
+            adı
+        </th>
+        <th>fiyat</th>
+
+    </tr>
+
+    @foreach (Urunler item in ViewBag.a)
+    {
+        <tr>
+            <td>
+                @item.UrunAdi
+            </td>
+            <td>@item.Fiyat</td>
+        </tr>
+    }
+
+</table>
+
+
